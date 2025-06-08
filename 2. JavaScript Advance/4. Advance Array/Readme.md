@@ -1,22 +1,23 @@
 # 🔄 JavaScript Array Problems & Solutions
 
-This file demonstrates different array manipulation techniques using JavaScript. It includes solutions to problems like:
+This file demonstrates various JavaScript array manipulation techniques. It covers common algorithmic challenges such as:
 
 - Array Rotation (Right & Left)
 - Merging Sorted Arrays
 - Removing Duplicates
 - Maximizing Stock Profit
-- Sorting an Array with Limited Values
-
-## 1. 🌀 Array Rotation
-
-Rotate an array by `k` positions either to the **right** or **left**.
+- Sorting Arrays with Fixed Elements
+- Finding Majority Element
+- Maximum Subarray Sum
+- Trapping Rain Water
 
 ---
 
+## 1. 🌀 Array Rotation
+
 ### 🔁 Right Rotation
 
-#### 1. Brute Force Approach
+#### ✅ Brute Force Approach
 
 ```js
 let arr = [1, 2, 3, 4, 5];
@@ -40,9 +41,7 @@ Input:  [1, 2, 3, 4, 5], k = 2
 Output: [4, 5, 1, 2, 3]
 ```
 
----
-
-#### 2. Using a Temporary Array
+#### ✅ Using Temporary Array
 
 ```js
 let arr = [1, 2, 3, 4, 5];
@@ -58,13 +57,10 @@ console.log(tempArray);
 ```
 
 ```
-Input:  [1, 2, 3, 4, 5], k = 2
 Output: [4, 5, 1, 2, 3]
 ```
 
----
-
-#### 3. Two Pointer Technique (Reversal Algorithm)
+#### ✅ Reversal Algorithm
 
 ```js
 let arr = [1, 2, 3, 4, 5];
@@ -88,7 +84,6 @@ console.log(arr);
 ```
 
 ```
-Input:  [1, 2, 3, 4, 5], k = 2
 Output: [4, 5, 1, 2, 3]
 ```
 
@@ -96,7 +91,7 @@ Output: [4, 5, 1, 2, 3]
 
 ### 🔁 Left Rotation
 
-#### 1. Brute Force Approach
+#### ✅ Brute Force Approach
 
 ```js
 let arr = [1, 2, 3, 4, 5];
@@ -116,13 +111,10 @@ console.log(arr);
 ```
 
 ```
-Input:  [1, 2, 3, 4, 5], k = 2
 Output: [3, 4, 5, 1, 2]
 ```
 
----
-
-#### 2. Using a Temporary Array
+#### ✅ Using Temporary Array
 
 ```js
 let arr = [1, 2, 3, 4, 5];
@@ -138,13 +130,10 @@ console.log(tempArray);
 ```
 
 ```
-Input:  [1, 2, 3, 4, 5], k = 2
 Output: [3, 4, 5, 1, 2]
 ```
 
----
-
-#### 3. Two Pointer Technique (Reversal Algorithm)
+#### ✅ Reversal Algorithm
 
 ```js
 let arr = [1, 2, 3, 4, 5];
@@ -169,7 +158,6 @@ console.log(arr);
 ```
 
 ```
-Input:  [1, 2, 3, 4, 5], k = 2
 Output: [3, 4, 5, 1, 2]
 ```
 
@@ -203,8 +191,7 @@ console.log(merge);
 ```
 
 ```
-Output:
-[1, 1, 2, 2, 3, 3, 4, 4, 5, 6]
+Output: [1, 1, 2, 2, 3, 3, 4, 4, 5, 6]
 ```
 
 ---
@@ -256,8 +243,7 @@ console.log(maxProfit);
 ```
 
 ```
-Output:
-5
+Output: 5
 ```
 
 ---
@@ -288,6 +274,103 @@ console.log(nums);
 ```
 
 ```
-Output:
-[0, 0, 1, 1, 2, 2, 2]
+Output: [0, 0, 1, 1, 2, 2, 2]
 ```
+
+---
+
+## 6. ✅ Majority Element (> n/2 Times)
+
+Uses **Boyer-Moore Voting Algorithm**.
+
+```js
+let nums = [2, 2, 1, 1, 1, 2, 2];
+
+let ans = nums[0];
+let count = 1;
+
+for (let i = 1; i < nums.length; i++) {
+  if (count == 0) {
+    ans = nums[i];
+    count = 1;
+  } else if (ans == nums[i]) {
+    count++;
+  } else {
+    count--;
+  }
+}
+
+console.log(ans);
+```
+
+```
+Output: 2
+```
+
+---
+
+## 7. 💰 Maximum Subarray Sum
+
+Using **Kadane’s Algorithm**.
+
+```js
+let nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4];
+
+let sum = 0;
+let max = -Infinity;
+
+for (let i = 0; i < nums.length; i++) {
+  sum += nums[i];
+  max = Math.max(max, sum);
+  if (sum < 0) sum = 0;
+}
+
+console.log(max);
+```
+
+```
+Output: 6
+```
+
+➡️ Explanation: `[4, -1, 2, 1]` has the max sum of `6`.
+
+---
+
+## 8. 🌧️ Trapping Rain Water
+
+```js
+let height = [4, 2, 0, 3, 2, 5];
+
+let left = new Array(height.length);
+let right = new Array(height.length);
+
+let maxLeft = height[0];
+let maxRight = height[height.length - 1];
+
+left[0] = maxLeft;
+right[right.length - 1] = maxRight;
+
+for (let i = 1; i < height.length; i++) {
+  maxLeft = Math.max(height[i], maxLeft);
+  left[i] = maxLeft;
+}
+
+for (let i = height.length - 2; i >= 0; i--) {
+  maxRight = Math.max(height[i], maxRight);
+  right[i] = maxRight;
+}
+
+let ans = 0;
+
+for (let i = 0; i < height.length; i++) {
+  ans += Math.min(left[i], right[i]) - height[i];
+}
+
+console.log(ans);
+```
+
+```
+Output: 9
+```
+
+---
