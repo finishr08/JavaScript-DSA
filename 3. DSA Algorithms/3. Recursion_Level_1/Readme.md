@@ -175,3 +175,19 @@ console.log(fibnacci(n));
 ```
 8
 ```
+
+### 9. HCF (Higest Common Factor) (Using Recursion)
+
+```javascript
+function hcf(a, b) {
+  if (b == 0) return a;
+  return hcf(b, a % b);
+}
+console.log("H.C.F" + " = " + hcf(32, 20));
+```
+
+**Output:**
+
+```
+8
+```
